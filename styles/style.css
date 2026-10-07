@@ -412,10 +412,20 @@ h2 {
     margin-bottom: 3mm;
   }
 
+  /* A long job may continue on the next page, but its heading stays with its text. */
   .job {
-    break-inside: avoid;
     margin-bottom: 4mm;
     padding-bottom: 4mm;
+  }
+
+  .job h3,
+  .job-meta {
+    break-after: avoid;
+  }
+
+  .job p,
+  .job li {
+    break-inside: avoid;
   }
 
   .job h3 {
@@ -459,10 +469,19 @@ h2 {
   }
 
   /*
-   * On paper skills go before the experience: a recruiter scans the top third of the first page.
-   * They read as lines of text, not as narrow columns.
+   * On paper core skills go before the experience: a recruiter scans the top third of the first page.
+   * The rest of the skills follow the experience. All of them read as lines of text, not narrow columns.
    */
   .skills {
+    display: contents;
+  }
+
+  .skills section {
+    order: 5;
+    margin-top: 0;
+  }
+
+  .skills .skills-core {
     order: 3;
   }
 
@@ -472,8 +491,9 @@ h2 {
     border-top: 1px solid var(--border);
   }
 
-  .skills section {
-    margin-top: 3mm;
+  .skills-core + section {
+    padding-top: 4mm;
+    border-top: 1px solid var(--border);
   }
 
   .plain-list {
