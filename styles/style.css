@@ -1,128 +1,515 @@
-h1 {
-  font-size: 60px;
+:root {
+  --text: #1f2328;
+  --muted: #5b636d;
+  --accent: #0a62c9;
+  --border: #e4e7eb;
+  --bg: #fff;
+  --sidebar-width: 270px;
+  color-scheme: light;
 }
-h3 {
-  font-size: 24px;
-  margin-top: 10px;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-.img {
-  margin-bottom: 20px;
-  float: right;
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
-.img img {
-  border: 1px solid #eee;
-  width: 100%;
-}
-.logo {
-  float: right;
-  width: 100px;
-  margin-left: 50px;
-  margin-bottom: 20px;
-}
-.head {
-  font-size: 20px;
-  text-align: center;
-}
-.head h4 {
-  font-size: 22px;
-}
-.head .col-xs-4 {
-  font-size: 14px;
-}
-.connection {
-  display: flex;
-  align-items: center;
-}
-.connection svg {
-  height: 24px;
-  width: 24px;
-  margin-right: 5px;
-}
-.experience {
-  padding: 0;
-}
-.experience > li {
-  padding: 0;
-  margin: 0 0 20px;
-  border-bottom: 1px solid #eee;
-  overflow: hidden;
-}
-.experience > li:last-child {
-  border-bottom: none;
+
+body {
   margin: 0;
-  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-.experience i {
-  color: #555;
-  font-weight: normal;
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
 }
-.skillset {
-  margin: 20px 0;
-  list-style: none;
-  padding: 0;
+
+a {
+  color: var(--accent);
+  text-decoration: none;
 }
-.skillset li {
-  margin-bottom: 5px;
+
+a:hover {
+  text-decoration: underline;
 }
-.skillset li:before {
-  content: '♣';
-  margin-right: 5px;
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
-.portfolio a:after {
-  content: attr(href);
+
+h2 {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
-.mt-0 {
-  margin-top: 0;
+
+/* Layout */
+
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "intro   sidebar"
+    "content sidebar";
+  gap: 32px 56px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px;
 }
-.b-post {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-.b-post:hover {
-  background: #eee;
-}
-.b-post img {
-  width: 25px;
-  height: 25px;
-}
-.b-post img[src="https://st.fl.ru/images/user-default-small.png"] {
-  display: none;
-}
-.b-post__avatar {
-  float: left;
-  margin-right: 10px;
-  background: #fff;
-}
-.b-post__time {
-  font-size: 8px;
-  float: right;
-  padding: 3px 10px 0 0;
-}
-.b-post__txt {
-  clear: both;
-  padding-top: 10px;
-}
-.b-username {
-  font-size: 8px;
-  padding: 2px;
-  background: #fafafa;
-}
-.b-fon {
-  clear: both;
-  margin: 3px 2px 0;
-  color: #aaa;
-  font-style: italic;
-  font-size: 8px;
-}
-.feedback {
-  font-size: 10px;
-}
+
 .intro {
-  font-size: 16px;
+  grid-area: intro;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
 }
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
+
+/* Intro */
+
+.intro h1 {
+  font-size: 40px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.role {
+  margin: 6px 0 20px;
+  color: var(--muted);
+  font-size: 20px;
+}
+
+.summary {
+  font-size: 17px;
+}
+
+/* Sidebar */
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+.contacts,
+.plain-list,
+.earlier {
+  padding: 0;
+  list-style: none;
+}
+
+.contacts,
+.plain-list {
+  display: grid;
+}
+
 .contacts {
-  margin-top: 20px;
+  gap: 8px;
 }
-.contacts a {
-  margin-bottom: 10px;
+
+.contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.contact svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skills section {
+  margin-top: 28px;
+}
+
+.plain-list {
+  gap: 6px;
+  font-size: 15px;
+}
+
+/* Experience */
+
+.content > section + section {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.content h2 {
+  margin-bottom: 20px;
+}
+
+.job {
+  display: flow-root;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.job:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.job h3,
+.earlier h3 {
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.job-meta {
+  margin: 2px 0 12px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.job-logo {
+  float: right;
+  width: auto;
+  height: auto;
+  max-width: 104px;
+  max-height: 52px;
+  margin: 4px 0 12px 24px;
+}
+
+.job ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.job li + li {
+  margin-top: 6px;
+}
+
+.job li::marker {
+  color: var(--muted);
+}
+
+.earlier {
+  display: grid;
+  gap: 18px;
+}
+
+.earlier h3 {
+  font-size: 17px;
+}
+
+.earlier .job-meta {
+  margin-bottom: 4px;
+}
+
+/*
+ * One column on phones and on paper. The PDF also goes through ATS parsers, and two columns
+ * come out of it as interleaved lines. The sidebar splits up: contacts go under the intro,
+ * skills after the experience.
+ */
+
+@media screen and (max-width: 760px), print {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: none;
+  }
+
+  .sidebar {
+    display: contents;
+  }
+
+  .intro,
+  .content {
+    grid-area: auto;
+  }
+
+  .intro {
+    order: 1;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .profile {
+    order: 2;
+  }
+
+  .content {
+    order: 3;
+  }
+
+  .skills {
+    order: 4;
+  }
+
+  .skills section:first-child {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .page {
+    gap: 28px;
+    padding: 24px 16px 40px;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skills {
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .intro h1 {
+    font-size: 30px;
+  }
+
+  .role {
+    margin-bottom: 16px;
+    font-size: 17px;
+  }
+
+  .summary {
+    font-size: 16px;
+  }
+
+  .photo {
+    flex: none;
+    width: 112px;
+    margin: 0;
+  }
+
+  .contact {
+    font-size: 15px;
+  }
+
+  .job h3 {
+    font-size: 18px;
+  }
+
+  .earlier h3 {
+    font-size: 16px;
+  }
+
+  .job-logo {
+    max-width: 72px;
+    max-height: 36px;
+    margin-left: 16px;
+  }
+}
+
+/* Print and PDF */
+
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+@media print {
+  body {
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .screen-only,
+  .photo {
+    display: none;
+  }
+
+  .page {
+    gap: 5mm;
+    max-width: none;
+    padding: 0;
+  }
+
+  h2 {
+    margin-bottom: 2mm;
+    font-size: 8pt;
+    break-after: avoid;
+  }
+
+  .intro h1 {
+    font-size: 22pt;
+  }
+
+  .role {
+    margin: 1mm 0 3mm;
+    font-size: 12pt;
+  }
+
+  .summary {
+    font-size: 10pt;
+  }
+
+  .profile {
+    padding: 2.5mm 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1mm 6mm;
+  }
+
+  .contact {
+    gap: 1.5mm;
+    font-size: 9pt;
+  }
+
+  .contact svg {
+    width: 3.5mm;
+    height: 3.5mm;
+  }
+
+  .content > section + section {
+    margin-top: 5mm;
+    padding-top: 4mm;
+  }
+
+  .content h2 {
+    margin-bottom: 3mm;
+  }
+
+  .job {
+    break-inside: avoid;
+    margin-bottom: 4mm;
+    padding-bottom: 4mm;
+  }
+
+  .job h3 {
+    font-size: 11pt;
+  }
+
+  .earlier {
+    gap: 2.5mm;
+  }
+
+  .earlier li {
+    break-inside: avoid;
+  }
+
+  .earlier h3 {
+    font-size: 10pt;
+  }
+
+  .job-meta {
+    margin-bottom: 1.5mm;
+    font-size: 9pt;
+  }
+
+  .earlier .job-meta {
+    margin-bottom: 0.5mm;
+  }
+
+  .job-logo {
+    max-width: 22mm;
+    max-height: 10mm;
+    margin-left: 5mm;
+  }
+
+  .job ul {
+    margin-top: 1.5mm;
+    padding-left: 4.5mm;
+  }
+
+  .job li + li {
+    margin-top: 1mm;
+  }
+
+  /*
+   * On paper skills go before the experience: a recruiter scans the top third of the first page.
+   * They read as lines of text, not as narrow columns.
+   */
+  .skills {
+    order: 3;
+  }
+
+  .content {
+    order: 4;
+    padding-top: 4mm;
+    border-top: 1px solid var(--border);
+  }
+
+  .skills section {
+    margin-top: 3mm;
+  }
+
+  .plain-list {
+    display: block;
+    font-size: 9.5pt;
+  }
+
+  .plain-list li {
+    display: inline;
+  }
+
+  .plain-list li + li::before {
+    content: " · ";
+    color: var(--muted);
+  }
+}
+
+/* Russian CVs are expected to carry a photo, so the Russian page keeps it on paper. */
+
+@media print {
+  .print-photo .profile {
+    display: flex;
+    align-items: center;
+    gap: 5mm;
+  }
+
+  .print-photo .photo {
+    display: block;
+    flex: none;
+    width: 24mm;
+    margin: 0;
+    border-radius: 2mm;
+  }
+
+  .print-photo .contacts {
+    display: grid;
+    gap: 1mm;
+  }
 }
